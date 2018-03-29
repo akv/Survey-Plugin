@@ -8,18 +8,43 @@
 
 namespace Survey\Http\Controllers;
 
+use PHPUnit\Framework\Constraint\Exception;
 use App\Http\Controllers\Controller;
-
-use Survey\Models\SurveyModel;
+use Illuminate\Support\Facades\Request;
+use Survey\Models\ReviewsModel;
+use Survey\Facades\SurveyFacade;
+use MySurvey;
 
 class SurveryController extends Controller
 {
+    private $model = NULL;
+    private $_facade = NULL;
     
-    public function index()
+    public function __construct(ReviewsModel $survey)
     {
-        $model = new SurveyModel();
-        //echo $model->index(); exit;
-        return view('survey::survey-index',['mydata'=> array('fruit'=>'Apple','fruit2'=> "Mango")]);
+        $this->model = $survey;
+     
+    }
+
+
+    public function index( $data = NULL,  Request $request)
+    {
+        $embed = (isset($data['embed'])?($data['embed']):(array()));
+        $allReviews  = ReviewsModel::with($embed)->get();
+         
+        if($allReviews->count() == 0)
+            throw new Exception("No records available", 401);
+        
+        $data = [];
+        $data['count']= $allReviews->count();
+        $data['reviews'] = $allReviews->toArray();
+
+        //Rating Calculaton 
+        MySurvey = 
+        
+        return view('survey::survey-index',['reviews'=> $data]);
     
     }
+    
+    
 }

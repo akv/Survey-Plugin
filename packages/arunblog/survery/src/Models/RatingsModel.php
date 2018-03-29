@@ -8,13 +8,14 @@
 
 namespace Survey\Models;
 
+use PHPUnit\Framework\Constraint\Exception;
+
 use \Illuminate\Database\Eloquent\Model as Eloquent;
 
-class SurveyModel extends Eloquent
+class RatingsModel extends Eloquent
 {
-    public function index()
-    {
-        echo 'Hello';
-    }
-    
+    protected $table = 'reviews';
+     
+        
+
 }
