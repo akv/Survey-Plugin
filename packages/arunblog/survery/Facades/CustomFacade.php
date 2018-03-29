@@ -10,15 +10,11 @@ namespace Survey\Facades;
 
 class CustomFacade {
     
-    public static function sayHello($data = [])
+    public static function getRatings($data = [])
     {
         echo "Hello World from Facade!";
     }
     
-      public static function testFunction($data = [])
-    {
-        echo "Hello World from Facadeasdasdsa!";
-    }
-    
+     
     
 }

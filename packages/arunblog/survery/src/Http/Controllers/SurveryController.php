@@ -40,7 +40,7 @@ class SurveryController extends Controller
         $data['reviews'] = $allReviews->toArray();
 
         //Rating Calculaton 
-        MySurvey = 
+        $ratings = MySurvey::getRatings();
         
         return view('survey::survey-index',['reviews'=> $data]);
     
