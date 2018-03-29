@@ -14,18 +14,11 @@ use Survey\Models\SurveyModel;
 
 class SurveryController extends Controller
 {
-   private  $_model = NULL;
-   
-    public function __contruct()
-    {
-        $this->$model = new SurveyModel();
-    }
-
-
+    
     public function index()
     {
-       echo $this->$model->index(); exit;
-        
+        $model = new SurveyModel();
+        //echo $model->index(); exit;
         return view('survey::survey-index',['mydata'=> array('fruit'=>'Apple','fruit2'=> "Mango")]);
     
     }
