@@ -44,6 +44,8 @@ php artisan make:seeder
 composer dump-autoload
  
 ```
+lastly type below URL to see the things in action 
+http://yourlocalhost/audit
 
 
 ## Author
@@ -51,4 +53,4 @@ composer dump-autoload
 
 ## License
 
-This project is licensed under the Arun Verma
+This project is licensed under the Arun Verma<arun12verma@gmail.com>
