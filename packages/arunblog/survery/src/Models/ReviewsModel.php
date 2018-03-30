@@ -16,5 +16,4 @@ class ReviewsModel extends Eloquent
 {
     protected $table = 'reviews';
          
-
 }

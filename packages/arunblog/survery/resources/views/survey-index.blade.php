@@ -13,12 +13,17 @@
 
 
     <div class="container">
-    			
+    			@if(Session::has('success_message'))
+                        <div class="alert alert-success" >
+                            <a class="close" data-dismiss="alert">×</a>
+                            <strong>Heads Up!</strong> {!!Session::get('success_message')!!}
+                        </div>
+                        @endif
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="rating-block">
 					<h4>Average user rating</h4>
-					<h2 class="bold padding-bottom-7">{{ isset($avarageRating) ? $avarageRating : 0 }} <small>/ 5</small></h2>
+					<h2 class="bold padding-bottom-7">{{ isset($avg_rating) ? $avg_rating : 0 }} <small>/ 5</small></h2>
 					
                                         
                                         @for ($i = 1; $i <= 5; $i++)
@@ -112,7 +117,7 @@
 		<div class="row">
 			<div class="col-sm-7">
 				<hr/>
-                                <div class="review-block" style="height: 500px; overflow-y: scroll;">
+                                <div class="review-block" style="height: 300px; overflow-y: scroll;">
                                     @foreach ($reviews['reviews'] as $review)
 					<div class="row">
 						<div class="col-sm-12">
@@ -147,11 +152,68 @@
 				</div>
 			</div>
                     
-                    
+                    <div class="row" >
+                        <div class="col-sm-7" style="margin-top:20px;">
+                            <h3><u>Please give your feedback here</u></h3>    
+                    {{ Form::open(array('url' => '/audit/review/add')) }}
+                        {{ Form::token() }}
+                        
+                        
+
+                            <div class="controls">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="form_name">Name *</label>
+                                            <input id="reviewer_name" type="text" name="reviewer_name" class="form-control" placeholder="Please enter your Name *" required="required" data-error="Name is required.">
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="form_lastname">Title *</label>
+                                            <input id="review_title" type="text" name="review_title" class="form-control" placeholder="Please enter Title *" required="required" data-error="Title is required.">
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="form_message">Rating *</label>
+                                            <select id="rating_id" name="rating_id" class="form-control" placeholder="Your review *" rows="4" required="required" data-error="Please,leave us a review.">
+                                                <option value=""> Select a Rating</option>
+                                                <option value="1"> 1</option>
+                                                <option value="2"> 2</option>
+                                                <option value="3"> 3</option>
+                                                <option value="4"> 4</option>
+                                                <option value="5"> 5</option>
+                                                
+                                            </select>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="form_message">Message *</label>
+                                            <textarea id="review" name="review" class="form-control" placeholder="Your review *" rows="4" required="required" data-error="Please,leave us a review."></textarea>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="submit" class="btn btn-success btn-send" value="Add Review">
+                                    </div>
+                                </div>
+                               
+                            </div>
+                    {{ Form::close() }}
+                        </div>
+                    </div>
 		</div>
 		
     </div> <!-- /container -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

@@ -1,11 +1,11 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
+/* Custom Facade will evaluate the avarage ratings and Rating Array
+ * @return: Array Obj;
+ * @author: Arun Verma<arun12verma@gmail.com>
+ * Dated: 29th-March-2019
+ */
 namespace Survey\Facades;
 
 class CustomFacade {
@@ -28,15 +28,18 @@ class CustomFacade {
     }
     
     public static function avarageRating($data = []){
-        if (empty($data))
+        try {
+            if (empty($data))
                 throw new Exception("No Data found", 404);
-        
-        $totalcount = count($data);  
-        $totalReviews = self::arraySum($data); 
-        $avarageRating  = $totalReviews/$totalcount;
-        
-        return $avarageRating;
-        
+
+            $totalcount = count($data);
+            $totalReviews = self::arraySum($data);
+            $avarageRating = $totalReviews / $totalcount;
+
+            return $avarageRating;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
     }
     
     

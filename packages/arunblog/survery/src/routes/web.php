@@ -15,11 +15,7 @@ Route::group([
 ], function (){
     
     Route::get('/', 'SurveryController@index');
-    
-    
-    Route::get('/test', function(){
-       return "hello how are you my friend";
-    });
+    Route::post('/review/add', 'SurveryController@addReview');
     
     
 });
