@@ -6,33 +6,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-
     <title>Review Management</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/navbar-fixed-top.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="js/ie-emulation-modes-warning.js"></script>
-
-   
   </head>
 
   <body>
 
-      <?php // echo '<pre>'; print_r($reviews); exit; ?>
-  
 
     <div class="container">
     			
@@ -40,22 +18,25 @@
 			<div class="col-sm-3">
 				<div class="rating-block">
 					<h4>Average user rating</h4>
-					<h2 class="bold padding-bottom-7">4.3 <small>/ 5</small></h2>
-					<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-					  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-					  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-					  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-					  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-					  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-					</button>
+					<h2 class="bold padding-bottom-7">{{ isset($avarageRating) ? $avarageRating : 0 }} <small>/ 5</small></h2>
+					
+                                        
+                                        @for ($i = 1; $i <= 5; $i++)
+                                        <?php
+                                        if ($i <= $avarageRating) {
+                                            echo '<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                   </button>';
+                                        } else {
+                                            echo '<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                                                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                                   </button>';
+                                        }
+                                        ?>
+
+                                        @endfor
+                                        
+                      
 				</div>
 			</div>
 			<div class="col-sm-3">
@@ -71,7 +52,7 @@
 						  </div>
 						</div>
 					</div>
-					<div class="pull-right" style="margin-left:10px;">1</div>
+                                        <div class="pull-right" style="margin-left:10px;">{{ isset($ratings[5]) ? $ratings[5] : 0 }}</div>
 				</div>
 				<div class="pull-left">
 					<div class="pull-left" style="width:35px; line-height:1;">
@@ -84,7 +65,7 @@
 						  </div>
 						</div>
 					</div>
-					<div class="pull-right" style="margin-left:10px;">1</div>
+					<div class="pull-right" style="margin-left:10px;">{{ isset($ratings[4]) ? $ratings[4] : 0 }}</div>
 				</div>
 				<div class="pull-left">
 					<div class="pull-left" style="width:35px; line-height:1;">
@@ -97,7 +78,7 @@
 						  </div>
 						</div>
 					</div>
-					<div class="pull-right" style="margin-left:10px;">0</div>
+					<div class="pull-right" style="margin-left:10px;">{{ isset($ratings[3]) ? $ratings[3] : 0 }}</div>
 				</div>
 				<div class="pull-left">
 					<div class="pull-left" style="width:35px; line-height:1;">
@@ -110,7 +91,7 @@
 						  </div>
 						</div>
 					</div>
-					<div class="pull-right" style="margin-left:10px;">0</div>
+					<div class="pull-right" style="margin-left:10px;">{{ isset($ratings[2]) ? $ratings[2] : 0 }}</div>
 				</div>
 				<div class="pull-left">
 					<div class="pull-left" style="width:35px; line-height:1;">
@@ -123,7 +104,7 @@
 						  </div>
 						</div>
 					</div>
-					<div class="pull-right" style="margin-left:10px;">0</div>
+					<div class="pull-right" style="margin-left:10px;">{{ isset($ratings[1]) ? $ratings[1] : 0 }}</div>
 				</div>
 			</div>			
 		</div>			
@@ -131,7 +112,7 @@
 		<div class="row">
 			<div class="col-sm-7">
 				<hr/>
-				<div class="review-block">
+                                <div class="review-block" style="height: 500px; overflow-y: scroll;">
                                     @foreach ($reviews['reviews'] as $review)
 					<div class="row">
 						<div class="col-sm-12">
@@ -160,10 +141,13 @@
 							<div class="review-block-description">{{$review['review']}}</div>
 						</div>
 					</div>
+                                    <br>
                                 @endforeach
                                   
 				</div>
 			</div>
+                    
+                    
 		</div>
 		
     </div> <!-- /container -->

@@ -15,7 +15,8 @@ use \Illuminate\Database\Eloquent\Model as Eloquent;
 class RatingsModel extends Eloquent
 {
     protected $table = 'reviews';
-     
+    
+    
         
 
 }

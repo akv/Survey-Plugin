@@ -27,24 +27,29 @@ class SurveryController extends Controller
     }
 
 
-    public function index( $data = NULL,  Request $request)
-    {
-        $embed = (isset($data['embed'])?($data['embed']):(array()));
-        $allReviews  = ReviewsModel::with($embed)->get();
-         
-        if($allReviews->count() == 0)
-            throw new Exception("No records available", 401);
-        
-        $data = [];
-        $data['count']= $allReviews->count();
-        $data['reviews'] = $allReviews->toArray();
+    public function index($data = NULL, Request $request) {
+        try {
+            $embed = (isset($data['embed']) ? ($data['embed']) : (array()));
+            $allReviews = ReviewsModel::with($embed)->get();
 
-        //Rating Calculaton 
-        $ratings = MySurvey::getRatings();
-        
-        return view('survey::survey-index',['reviews'=> $data]);
-    
+            if ($allReviews->count() == 0)
+                throw new Exception("No records available", 401);
+
+            $data = [];
+            $data['count'] = $allReviews->count();
+            $data['reviews'] = $allReviews->toArray();
+
+             //Rating Calculaton 
+             $ratings = MySurvey::getRatings($data['reviews']);
+            
+             // Getting the Avarage User Rating 
+             $avarageRating = MySurvey::avarageRating($data['reviews']); 
+             $avarageRating = floor($avarageRating);
+             
+            return view('survey::survey-index', ['reviews' => $data, 'ratings'=>$ratings,'avarageRating'=> $avarageRating ]);
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
-    
-    
+
 }
